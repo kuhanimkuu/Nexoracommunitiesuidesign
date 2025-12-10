@@ -13,6 +13,8 @@ export interface FlashCommunity {
   endsAt: Date;
   gradient: string;
   joined?: boolean;
+  triggerType: 'event' | 'meetup' | 'discussion' | 'emergency';
+  coverImage?: string;
 }
 
 const mockFlashCommunities: FlashCommunity[] = [
@@ -26,7 +28,8 @@ const mockFlashCommunities: FlashCommunity[] = [
     status: 'live',
     endsAt: new Date(Date.now() + 2 * 60 * 60 * 1000 + 15 * 60 * 1000), // 2h 15m
     gradient: 'from-pink-500 via-purple-500 to-indigo-500',
-    joined: true
+    joined: true,
+    triggerType: 'event'
   },
   {
     id: '2',
@@ -38,7 +41,8 @@ const mockFlashCommunities: FlashCommunity[] = [
     status: 'active',
     endsAt: new Date(Date.now() + 5 * 60 * 60 * 1000 + 42 * 60 * 1000), // 5h 42m
     gradient: 'from-cyan-500 via-teal-500 to-green-500',
-    joined: false
+    joined: false,
+    triggerType: 'meetup'
   },
   {
     id: '3',
@@ -50,7 +54,8 @@ const mockFlashCommunities: FlashCommunity[] = [
     status: 'ending-soon',
     endsAt: new Date(Date.now() + 45 * 60 * 1000), // 45m
     gradient: 'from-orange-500 via-red-500 to-pink-500',
-    joined: true
+    joined: true,
+    triggerType: 'event'
   },
   {
     id: '4',
@@ -62,7 +67,8 @@ const mockFlashCommunities: FlashCommunity[] = [
     status: 'ended',
     endsAt: new Date(Date.now() - 2 * 60 * 60 * 1000), // ended 2h ago
     gradient: 'from-gray-400 to-gray-500',
-    joined: false
+    joined: false,
+    triggerType: 'discussion'
   },
   {
     id: '5',
@@ -74,7 +80,21 @@ const mockFlashCommunities: FlashCommunity[] = [
     status: 'active',
     endsAt: new Date(Date.now() + 8 * 60 * 60 * 1000), // 8h
     gradient: 'from-yellow-500 via-amber-500 to-orange-500',
-    joined: false
+    joined: false,
+    triggerType: 'discussion'
+  },
+  {
+    id: '6',
+    name: 'Emergency: Server Down',
+    description: 'Critical incident response - all hands on deck to restore services',
+    category: 'Technical',
+    participantCount: 56,
+    icon: '🚨',
+    status: 'live',
+    endsAt: new Date(Date.now() + 30 * 60 * 1000), // 30m
+    gradient: 'from-red-500 to-rose-600',
+    joined: true,
+    triggerType: 'emergency'
   }
 ];
 
