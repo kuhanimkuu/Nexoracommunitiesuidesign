@@ -10,6 +10,39 @@
     --color-accent-purple: #C0C4FF;
     --color-white: #FFFFFF;
     --color-border: #E5E7EB;
+    
+    /* Normal Communities - Warm & Social */
+    --normal-teal-primary: #38C4DA;
+    --normal-teal-light: #5DD5E8;
+    --normal-teal-dark: #2FB3C9;
+    --normal-purple-primary: #C0C4FF;
+    --normal-purple-light: #D4D7FF;
+    --normal-purple-dark: #A8ACFF;
+    --normal-gradient-warm: linear-gradient(135deg, #38C4DA 0%, #C0C4FF 100%);
+    --normal-gradient-soft: linear-gradient(135deg, rgba(56, 196, 218, 0.1) 0%, rgba(192, 196, 255, 0.1) 100%);
+    
+    /* Flash Communities - Electric & Urgent */
+    --flash-yellow-primary: #FFD700;
+    --flash-yellow-neon: #FFEB3B;
+    --flash-orange-electric: #FF6B35;
+    --flash-pink-neon: #FF006E;
+    --flash-purple-electric: #8338EC;
+    --flash-gradient-electric: linear-gradient(135deg, #FFD700 0%, #FF6B35 50%, #FF006E 100%);
+    --flash-gradient-neon: linear-gradient(135deg, #FFEB3B 0%, #8338EC 100%);
+    --flash-glow-yellow: 0 0 20px rgba(255, 215, 0, 0.5);
+    --flash-glow-pink: 0 0 20px rgba(255, 0, 110, 0.5);
+    
+    /* Radius tokens */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-full: 9999px;
+    
+    /* Shadow tokens */
+    --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --shadow-active: 0 12px 32px rgba(0, 0, 0, 0.16);
   }
 
   body {
@@ -62,5 +95,63 @@
 
   .animate-in {
     animation: slide-in-from-bottom-2 0.3s ease-out;
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    }
+    50% {
+      opacity: 0.8;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+    }
+  }
+  
+  @keyframes electric-pulse {
+    0%, 100% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  @keyframes scale-pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  
+  .animate-electric-pulse {
+    animation: electric-pulse 1.5s ease-in-out infinite;
+  }
+  
+  .animate-gradient-shift {
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
+  }
+  
+  .animate-scale-pulse {
+    animation: scale-pulse 2s ease-in-out infinite;
   }
 }

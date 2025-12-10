@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { NormalCommunities } from './components/NormalCommunities';
 import { FlashCommunities } from './components/FlashCommunities';
-import { Users, Zap } from 'lucide-react';
+import { DesignSystem } from './components/DesignSystem';
+import { Users, Zap, Palette } from 'lucide-react';
 
 export default function App() {
-  const [activeModule, setActiveModule] = useState<'normal' | 'flash'>('normal');
+  const [activeModule, setActiveModule] = useState<'normal' | 'flash' | 'design'>('normal');
 
   return (
     <div className="min-h-screen bg-[#F5F7FA]">
@@ -17,7 +18,9 @@ export default function App() {
               <p className="text-gray-600 text-sm">
                 {activeModule === 'normal' 
                   ? 'Connect with permanent communities' 
-                  : 'Join short-term flash events'}
+                  : activeModule === 'flash'
+                  ? 'Join short-term flash events'
+                  : 'Design system documentation'}
               </p>
             </div>
             
@@ -45,6 +48,17 @@ export default function App() {
                 <Zap size={18} />
                 <span>Flash</span>
               </button>
+              <button
+                onClick={() => setActiveModule('design')}
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all ${
+                  activeModule === 'design'
+                    ? 'bg-gradient-to-r from-[#38C4DA] to-[#C0C4FF] text-white shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                <Palette size={18} />
+                <span>Design</span>
+              </button>
             </div>
           </div>
         </div>
@@ -52,7 +66,9 @@ export default function App() {
 
       {/* Content */}
       <div className="max-w-7xl mx-auto px-6 py-6">
-        {activeModule === 'normal' ? <NormalCommunities /> : <FlashCommunities />}
+        {activeModule === 'normal' ? <NormalCommunities /> : 
+         activeModule === 'flash' ? <FlashCommunities /> : 
+         <DesignSystem />}
       </div>
     </div>
   );
