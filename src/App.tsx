@@ -1,31 +1,59 @@
-import { useState } from 'react';
-import { CommunitiesHome } from './components/CommunitiesHome';
-import { CommunityDetail } from './components/CommunityDetail';
+import React, { useState } from 'react';
+import { NormalCommunities } from './components/NormalCommunities';
+import { FlashCommunities } from './components/FlashCommunities';
+import { Users, Zap } from 'lucide-react';
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<'home' | 'community'>('home');
-  const [selectedCommunity, setSelectedCommunity] = useState<any>(null);
-
-  const handleCommunitySelect = (community: any) => {
-    setSelectedCommunity(community);
-    setCurrentView('community');
-  };
-
-  const handleBackToHome = () => {
-    setCurrentView('home');
-    setSelectedCommunity(null);
-  };
+  const [activeModule, setActiveModule] = useState<'normal' | 'flash'>('normal');
 
   return (
-    <div className="min-h-screen bg-[#FDFDFD]">
-      {currentView === 'home' ? (
-        <CommunitiesHome onCommunitySelect={handleCommunitySelect} />
-      ) : (
-        <CommunityDetail 
-          community={selectedCommunity} 
-          onBack={handleBackToHome}
-        />
-      )}
+    <div className="min-h-screen bg-[#F5F7FA]">
+      {/* Header */}
+      <div className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-gray-900 mb-1">Nexora Communities</h1>
+              <p className="text-gray-600 text-sm">
+                {activeModule === 'normal' 
+                  ? 'Connect with permanent communities' 
+                  : 'Join short-term flash events'}
+              </p>
+            </div>
+            
+            {/* Module Switcher */}
+            <div className="flex gap-2 bg-gray-100 p-1 rounded-xl">
+              <button
+                onClick={() => setActiveModule('normal')}
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all ${
+                  activeModule === 'normal'
+                    ? 'bg-white text-[#38C4DA] shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                <Users size={18} />
+                <span>Communities</span>
+              </button>
+              <button
+                onClick={() => setActiveModule('flash')}
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all ${
+                  activeModule === 'flash'
+                    ? 'bg-white text-[#C0C4FF] shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                <Zap size={18} />
+                <span>Flash</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="max-w-7xl mx-auto px-6 py-6">
+        {activeModule === 'normal' ? <NormalCommunities /> : <FlashCommunities />}
+      </div>
     </div>
   );
 }
